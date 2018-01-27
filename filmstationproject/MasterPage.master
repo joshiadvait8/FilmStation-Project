@@ -1,0 +1,172 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Film Station</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/magnify.css" rel="stylesheet" />
+       
+
+    <link href="css/Custom-Cs.css" rel="stylesheet" />
+ <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+  <style>
+      
+    /* Remove the navbar's default rounded borders and increase the bottom margin */
+    
+     .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+       height:80px;
+      background-color:black;
+      
+
+      
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+    }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+      <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+          .nav, .navbar-nav{
+               
+            margin-top:1%;
+            margin-left:5%;
+          }
+            
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus
+
+{
+    background-color: gray;
+}
+                   
+
+ 
+
+  </style>
+    
+</head>
+<body style="background-color:black;">
+    <form id="Form1" runat="server">
+
+
+<nav style="height:90px;" class="navbar navbar-inverse navbar-fixed-top ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button style="margin-bottom:7%;" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="Default.aspx"><img src="Images/logo.png" height="65px"/></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="Default.aspx">Home</a></li>
+        <li><a href="Product.aspx">Products</a></li>
+          <asp:SqlDataSource runat="server" ID="CategorySqlDataSource1" ConnectionString='<%$ ConnectionStrings:FilmStationConnectionString %>' SelectCommand="SELECT * FROM [category]"></asp:SqlDataSource>
+           <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Categories</li>
+                                    <li role="separator" class="divider"></li>
+                                    
+               <asp:Repeater ID="RptrCategory" runat="server" DataSourceID="CategorySqlDataSource1">
+                   
+                   <ItemTemplate> <li><a href="Category.aspx?id=<%#Eval("cat_id") %>"><%# Eval("cat_name") %> </a></li></ItemTemplate>
+               </asp:Repeater>
+          <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:FilmStationConnectionString %>' SelectCommand="SELECT * FROM [category]"></asp:SqlDataSource>
+               
+          
+
+                                    
+                                    
+                                </ul>
+                            </li>
+  
+      
+      
+        <li><a href="#">Contact</a></li>
+           <li><a href="yourorders.aspx">Your Orders</a></li>
+           <li><input type="search" placeholder="Search product Here..." class="form-control" id="searchtextbox" /></li>
+          <li><input type="button" class="btn btn-warning" value="Search" onclick="search();"/></li>
+         
+
+      </ul>
+      <ul id="nav" class="nav navbar-nav navbar-right">
+        
+        <li><a href="View_Cart.aspx"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+          <li><asp:HyperLink runat="server" Font-Bold="true" Font-Size="12" ID="h2" Text="Register"> </asp:HyperLink>
+              
+          </li>
+          <li><asp:HyperLink runat="server" Font-Bold="true" Font-Size="12" CssClass="glyphicon glyphicon-user" ID="h1"> </asp:HyperLink>
+              
+          </li>
+          <li><asp:Button Text="Logout" ID="logout" runat="server" CssClass="btn mybtn navbar-btn" onclick="logout_Click" /></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    
+<br>
+
+<br>
+  
+        
+            <asp:ContentPlaceHolder runat="server" ID="ContentPlaceHolder1">
+
+    </asp:ContentPlaceHolder>
+        
+        </form>
+    <br /><br />
+  
+ <div class="container"> </div><div>
+<footer style="background-color:black; color:white; text-align:center;">
+    
+ <p>&copy FilmStation.com Copyright</p>
+    
+</footer>
+  </div>
+         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+          
+    </script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js">
+      
+    </script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.magnify.js"></script>
+
+
+    <script type="text/javascript">
+        function search() {
+            window.location = "Product.aspx?search=" + document.getElementById("searchtextbox").value;
+        }
+
+    </script>
+ <audio autoplay loop>
+            <source  src="Media/god.mp3" type="audio/mp3">
+        </audio>
+       
+</body>
+</html>
